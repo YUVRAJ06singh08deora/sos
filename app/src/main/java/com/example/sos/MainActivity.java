@@ -10,7 +10,7 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SelectListner{
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     List<modelClass> userList;
@@ -52,15 +52,17 @@ public class MainActivity extends AppCompatActivity {
         layoutManager=new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        adapter=new Adapter (userList);
+        adapter=new Adapter (userList,this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onItemClicked(modelClass modelClass) {
+        Intent intent=new Intent(getApplicationContext(),chat_activity_window.class);
+        startActivity(intent);
+    }
 
-//    @Override
-//    public void onItemClicked(ModelClass modelClass) {
-//        Intent intent=new Intent(getApplicationContext(),CategoryActivity.class);
-//        startActivity(intent);
-//    }
+
+
 }

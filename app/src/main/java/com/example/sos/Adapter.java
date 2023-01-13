@@ -10,10 +10,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder>{
+public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> implements View.OnClickListener{
     private List<modelClass> userList;
     private SelectListner listner;
-    public Adapter(List<modelClass> userList) {
+    public Adapter(List<modelClass> userList,SelectListner listner) {
         this.userList = userList;
         this.listner=listner;
     }
@@ -40,11 +40,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder>{
                 listner.onItemClicked(userList.get(position));
             }
         });
+
     }
     @Override
     public int getItemCount() {
         return userList.size();
     }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
 
     public class viewHolder extends RecyclerView.ViewHolder{
 
@@ -65,6 +72,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder>{
             divider=itemView.findViewById(R.id.dividerLine);
             cardView=itemView.findViewById(R.id.image_view);
 
+
         }
 
         public void setData(int resource, String name, String msg, String time, String line) {
@@ -75,4 +83,5 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder>{
             divider.setText(line);
         }
     }
+
 }
